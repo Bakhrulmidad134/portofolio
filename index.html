@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Saya</title>
+    <style>
+        /* Reset dasar */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            outline: none; /* Menghapus garis fokus biru secara global */
+        }
+
+        body {
+            background-color: #1a1a1a; /* Warna latar belakang gelap agar porto menonjol */
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        /* Wadah utama portfolio */
+        .portfolio-container {
+            width: 100%;
+            max-width: 900px; /* Batas lebar maksimal portfolio di laptop */
+            padding: 20px 10px;
+            display: flex;
+            flex-direction: column;
+            gap: 0; /* Mengeliminasi jarak antar halaman agar continuous */
+        }
+
+        /* Pengaturan gambar tiap halaman (Sudah tanpa bayangan) */
+        .portfolio-page {
+            width: 100%;
+            height: auto;
+            display: block;    /* Menghilangkan celah spasi di bawah gambar */
+            border: 0;         /* Menghapus border bawaan browser */
+            outline: none;     /* Menghapus outline biru */
+            
+            /* KODE BOX-SHADOW SUDAH DIHAPUS DI SINI */
+        }
+
+        /* Tombol kembali ke atas */
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #ffffff;
+            color: #000000;
+            padding: 10px 15px;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 14px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            display: none;
+            z-index: 99;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="portfolio-container" id="portfolio"></div>
+
+    <a href="#" class="back-to-top" id="btnTop">↑ Atas</a>
+
+    <script>
+        const container = document.getElementById('portfolio');
+        const totalPages = 16; // Jumlah halaman gambar kamu
+
+        // Loop JavaScript untuk memasukkan 16 halaman secara otomatis
+        for (let i = 1; i <= totalPages; i++) {
+            const img = document.createElement('img');
+            
+            // Mengarah langsung ke file gambar (1.png dst) sesuai setup kamu
+            img.src = `${i}.png`; 
+            
+            img.alt = `Portfolio Halaman ${i}`;
+            img.className = 'portfolio-page';
+            
+            // Antisipasi jika gambar lambat di-load
+            img.loading = "lazy"; 
+            
+            container.appendChild(img);
+        }
+
+        // Script untuk memunculkan tombol Back to Top saat di-scroll
+        const btnTop = document.getElementById('btnTop');
+        window.onscroll = function() {
+            if (document.body.scrollTop > 500 || document.documentElement.scrollTop > 500) {
+                btnTop.style.display = "block";
+            } else {
+                btnTop.style.display = "none";
+            }
+        };
+    </script>
+</body>
+</html>
